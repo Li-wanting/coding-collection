@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .parent {
+        width: 600px;
+        height: 700px;
+        background-color: antiquewhite;
+      }
+      .child {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(17, 157, 157);
+      }
+
+      /* 方案1 */
+      .parent {
+        width: 600px;
+        height: 700px;
+        background-color: antiquewhite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .child {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(17, 157, 157);
+      }
+
+      /* 方案2 */
+      .parent {
+        position: relative;
+      }
+      .child {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* 方案3 */
+      .parent {
+        display: grid;
+        place-items: center;
+      }
+    </style>
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+  </body>
+</html>

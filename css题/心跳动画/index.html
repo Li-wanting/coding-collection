@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="heart"></div>
+    <style>
+      @keyframes heartbeats {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.9);
+        }
+      }
+      .heart {
+        width: 100px;
+        height: 100px;
+        animation: heartbeats 2s infinite ease-in-out;
+        background-color: red;
+        margin: 100px;
+      }
+    </style>
+  </body>
+</html>

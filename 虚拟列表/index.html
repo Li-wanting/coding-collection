@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 3 虚拟列表 Demo</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .content_box {
+        border: 1px solid #ccc;
+        overflow-y: auto;
+      }
+      .item {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #f0f0f0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Vue 3 全量 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <div id="app">
+      <h2>{{ message }}</h2>
+
+      <div
+        class="content_box"
+        :style="{ height: `${contentHeight}px` }"
+        @scroll="onScroll"
+      >
+        <!-- 占位容器：用总高度撑出滚动条 -->
+        <div
+          :style="{
+            height: `${itemHeight * listAll.length}px`,
+            position: 'relative'
+          }"
+        >
+          <!-- 真实渲染区域：根据滚动位置 absolute 定位 -->
+          <div
+            :style="{
+              position: 'absolute',
+              top: `${top}px`,
+              left: 0,
+              right: 0
+            }"
+          >
+            <div
+              v-for="(item, index) in showList"
+              :key="index"
+              class="item"
+            >
+              {{ item }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const { createApp, ref, onMounted } = Vue;
+
+      createApp({
+        setup() {
+          /* 基础响应式变量 */
+          const message = ref("Vue 3 虚拟列表示例");
+          const listAll = ref([]);     // 全量数据
+          const showList = ref([]);    // 当前可视 + buffer
+
+          /* 长宽配置 */
+          const contentHeight = 300;   // 可视区域高度
+          const itemHeight = 30;       // 每条数据固定高度
+
+          /* 额外缓冲行，避免快滚白屏 */
+          const bufferCount = 2;
+          const showNum = ref(Math.ceil(contentHeight / itemHeight) + bufferCount);
+
+          /* 滚动控制 */
+          const top = ref(0);          // 真实渲染层的 top 偏移
+          const startIndex = ref(0);
+          const endIndex = ref(0);
+
+          /* 根据 startIndex 计算可见数据并同步偏移 */
+          const updateVisible = () => {
+            endIndex.value = Math.min(startIndex.value + showNum.value, listAll.value.length);
+            showList.value = listAll.value.slice(startIndex.value, endIndex.value);
+            top.value = startIndex.value * itemHeight;
+          };
+
+          /* 滚动事件 */
+          const onScroll = (e) => {
+            const scrollTop = e.target.scrollTop;
+            startIndex.value = Math.floor(scrollTop / itemHeight) - bufferCount;
+            if (startIndex.value < 0) startIndex.value = 0;
+            updateVisible();
+          };
+
+          /* 初始化 1 万条示例数据并渲染首屏 */
+          onMounted(() => {
+            const total = 10000;
+            for (let i = 0; i < total; i++) {
+              listAll.value.push(`第 ${i + 1} 条数据`);
+            }
+            updateVisible();
+          });
+
+          return {
+            /* 暴露给模板 */
+            message,
+            listAll,
+            showList,
+            contentHeight,
+            itemHeight,
+            top,
+            onScroll
+          };
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

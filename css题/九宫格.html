@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      /* 方案1 */
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+        height: 300px;
+      }
+      .grid-item {
+        width: 32%;
+        aspect-ratio: 1/1;
+        background-color: bisque;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 方案2 */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+
+      /* 方案3 */
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+        height: 300px;
+      }
+      .grid-item {
+        width: 33.33%;
+        height: 33.33%;
+        background-color: bisque;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 方案4 */
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        width: 200px;
+        gap: 8px;
+      }
+      .grid-item {
+        width: calc((100% - 16px) / 3);
+        aspect-ratio: 1/1;
+      }
+      
+    </style>
+    <div class="grid">
+      <div class="grid-item">1</div>
+      <div class="grid-item">2</div>
+      <div class="grid-item">3</div>
+      <div class="grid-item">4</div>
+      <div class="grid-item">5</div>
+      <div class="grid-item">6</div>
+      <div class="grid-item">7</div>
+      <div class="grid-item">8</div>
+      <div class="grid-item">9</div>
+    </div>
+  </body>
+</html>
