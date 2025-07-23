@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>清除浮动导致的高度塌陷问题</h2>
+    <div class="content-1">
+      <div class="box"></div>
+      <div class="text">
+        BFC 是一种布局机制，是浏览器渲染页面的一部分。当一个元素形成 BFC
+        时，它会独立于外部元素进行布局，不会被外部的浮动或 margin 所影响。˝
+      </div>
+    </div>
+    <div class="content-2"></div>
+    <style>
+      .content-1 {
+        /* 清除浮动导致的高度塌陷问题 */
+        display: flow-root;
+      }
+      .box {
+        float: left;
+        width: 200px;
+        height: 200px;
+        background-color: blueviolet;
+      }
+      .content-2 {
+        margin-top: 50px;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(43, 49, 226);
+      }
+    </style>
+  </body>
+</html>

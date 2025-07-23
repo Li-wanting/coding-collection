@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>解决margin合并问题</h2>
+    <div class="parent">
+      <div class="child-1">child-1</div>
+      <div class="child-wrapper">
+        <div class="child-2">child-2</div>
+      </div>
+    </div>
+
+    <style>
+      .parent {
+        margin-top: 30px;
+        background-color: bisque;
+        /* 解决父子margin合并 */
+        display: flow-root;
+      }
+      .child-1 {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        background-color: aqua;
+        width: 200px;
+        line-height: 200px;
+        height: 200px;
+        text-align: center;
+        display: flow-root;
+      }
+      .child-2 {
+        margin-top: 30px;
+        background-color: rgb(33, 209, 209);
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+      }
+      .child-wrapper {
+        /* 解决兄弟margin合并 */
+        display: flow-root;
+      }
+    </style>
+  </body>
+</html>
