@@ -1,3 +1,4 @@
+// 最近最少使用算法
 class LRU {
   #limit = 0;
   #map = new Map();
