@@ -1,4 +1,4 @@
-const timer = (time) => {
+const timer = (time, interval) => {
   let tempTime = time;
   const interval = setInterval(() => {
     console.log("111", tempTime);
@@ -7,7 +7,7 @@ const timer = (time) => {
       console.log("end");
     }
     tempTime--;
-  }, 1000);
+  }, interval * 1000);
 };
 
-timer(10);
+timer(10, 1);
