@@ -1,7 +1,9 @@
+// 使用 Array.prototype.flat(Infinity)
 const method1 = (arr) => {
   return arr.flat(Infinity);
 };
 
+// while + 扩展运算符
 const method2 = (arr) => {
   while (arr.some((item) => Array.isArray(item))) {
     arr = [].concat(...arr);
@@ -9,6 +11,7 @@ const method2 = (arr) => {
   return arr;
 };
 
+// 递归（最经典写法）
 const method3 = (arr) => {
   return arr.reduce((res, item) => {
     return res.concat(Array.isArray(item) ? method3(item) : item);
