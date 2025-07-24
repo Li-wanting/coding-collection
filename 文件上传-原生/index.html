@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<input>
+<!-- 单文件 -->
+<input type="file" id="singleUpload"></input>
+
+<!-- 多文件 -->
+<input type="file" id="multiUpload" multiple></input>
+<script>
+    // 单文件
+    const sUpload = document.getElementById('singleUpload')
+    sUpload.addEventListener('input', (e) => {
+        const file = sUpload.files[0]
+        const formData = new FormData()
+        formData.append('file', file);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        }).then((res) => {
+            console.log('res', res.json);
+        })
+    })
+
+    // 多文件
+    const mUpload = document.getElementById('multiUpload');
+    mUpload.addEventListener('input', (e) => {
+        const files = mUpload.files
+        const formData = new FormData()
+        Array.from(files).forEach((file, index) => {
+            formData.append(`file[${index}]`, file);
+        })
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        }).then((res) => {
+            console.log('res', res.json);
+        })
+    })
+</script>
+</body>
+
+</html>
