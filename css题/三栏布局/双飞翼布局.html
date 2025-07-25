@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .column {
+            height: 100%;
+            float: left;
+        }
+
+        .middle {
+            width: 100%;
+            background-color: antiquewhite;
+        }
+
+        .main {
+            padding: 0 200px 0 150px;
+        }
+
+        .left {
+            width: 150px;
+            background-color: rgb(62, 125, 104);
+            margin-left: -100%;
+        }
+
+        .right {
+            width: 200px;
+            background-color: rgb(37, 71, 60);
+            margin-left: -200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="column middle">
+            <div class="main">
+                中
+            </div>
+        </div>
+        <div class="column left">左</div>
+        <div class="column right">右</div>
+    </div>
+</body>
+
+</html>
