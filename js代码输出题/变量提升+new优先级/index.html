@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <pre>
+        function getName() { alert(5); } // 被提升（函数声明）
+
+        var getName; // 变量提升（但已被函数声明抢占）
+
+        // 最终：getName 变量被声明，但值仍是函数声明（alert(5)），后被函数表达式覆盖为 alert(4)
+    </pre>
+
+</body>
+<script>
+    function Foo() {
+        getName = function () {
+            console.log('1');
+
+        }
+        return this;
+    }
+    Foo.getName = function () {
+        console.log('2');
+
+    }
+    Foo.prototype.getName = function () {
+        console.log('3');
+
+    }
+
+    var getName = function () {
+        console.log('4');
+
+    }
+
+    function getName() {
+        console.log('5');
+
+    }
+
+    //  ->  调用的是 Foo 的静态方法 getName
+    Foo.getName(); // 2 
+
+    // -> 这是全局作用域下的 getName，在最后被赋值为：var getName = function () { alert(4); }
+    getName(); // 4 
+
+    // -> Foo() 执行 getName = function () { alert(1); } 
+    // 注意：没有用 var 定义，相当于修改了全局 getName
+    // 然后返回 this（非严格模式下，是 window），所以：
+    // Foo().getName() → window.getName()
+    Foo().getName(); // 1 
+
+    // -> 前面 Foo() 已经将全局的 getName 重新赋值为 alert(1)
+    getName(); // 1
+
+    // -> 相当于：new (Foo.getName)()
+    // 所以调用的是 Foo.getName
+    new Foo.getName(); // 2
+
+    // -> 先执行 new Foo() 得到一个实例对象，继承了 Foo.prototype
+    // 然后调用 .getName() 方法，其定义在：Foo.prototype.getName = function () { alert(3); }
+    new Foo().getName(); // 3
+
+    // -> 运算顺序等价于：
+    // let temp = new Foo();         // 得到实例对象
+    // let temp2 = temp.getName;     // 拿到原型上的函数
+    // new temp2();                  // new 调用它
+    // 就是对 Foo.prototype.getName 进行 new 调用
+    new new Foo().getName(); // 3
+</script>
+
+</html>
