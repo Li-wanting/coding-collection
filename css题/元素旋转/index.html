@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(71, 128, 109);
+            /*             
+            2s: 一圈旋转的时间（改快改慢）
+            linear: 匀速旋转（推荐用于 loading）
+            infinite: 无限次执行动画
+            */
+            animation: spin 2s linear infinite;
+            /* 暂停动画 */
+            animation-play-state: paused
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        2121
+    </div>
+</body>
+
+</html>
