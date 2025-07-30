@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            height: 100%;
+        }
+
+        .container {
+            width: 100%;
+            display: flex;
+        }
+
+        .left {
+            width: 100px;
+            height: 100%;
+            background-color: rgb(247, 228, 205);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            background-color: rgb(226, 176, 115);
+            color: #fff;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+        }
+        li:hover{
+            cursor: pointer;
+            background-color: rgb(242, 215, 183);
+        }
+
+        .right {
+            flex: 1;
+            height: 100%;
+            padding-left: 100px;
+        }
+
+        .module{
+            color: #fff;
+        }
+
+        #module1 {
+            background-color: rgb(205, 177, 232);
+        }
+
+        #module2 {
+            background-color: rgb(192, 147, 234);
+        }
+
+        #module3 {
+            background-color: rgb(166, 99, 229);
+        }
+
+        #module4 {
+            background-color: rgb(108, 38, 173);
+        }
+    </style>
+</head>
+
+
+<!-- 步骤：
+	1.	给右侧每个模块设置唯一 id 或 ref
+	2.	左侧点击事件中定位并滚动到对应模块
+	3.	使用 scrollIntoView() 或 element.scrollTop 进行滚动 -->
+
+<body>
+
+    <div class="container">
+        <!-- 左侧菜单 -->
+        <div class="left">
+            <ul>
+                <li onclick="scrollToSection('module1')">模块一</li>
+                <li onclick="scrollToSection('module2')">模块二</li>
+                <li onclick="scrollToSection('module3')">模块三</li>
+                <li onclick="scrollToSection('module4')">模块四</li>
+            </ul>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="right">
+            <div class="module" id="module1" style="height: 500px;">模块一内容</div>
+            <div class="module" id="module2" style="height: 500px;">模块二内容</div>
+            <div class="module" id="module3" style="height: 500px;">模块三内容</div>
+            <div class="module" id="module4" style="height: 500px;">模块四内容</div>
+        </div>
+    </div>
+
+
+    <script>
+        function scrollToSection(id) {
+            const ele = document.getElementById(id)
+            ele.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>
