@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <pre>
+        Web worker的出现为javascript创造了多线程的环境，
+        允许主线程创建worker线程，
+        将一些任务分配给后台运行，
+        在主线程运行的同时，
+        worker线程在后台运行互不打扰
+    </pre>
+    <div>
+       示例采用 斐波那契 模拟耗时操作
+    </div>
+    <script>
+        const worker1 = new Worker('./worker1.js')
+        const worker2 = new Worker('./worker2.js')
+        const worker3 = new Worker('./worker3.js')
+        const worker4 = new Worker('./worker4.js')
+
+
+        worker1.onmessage = (e) => {
+            console.log('worker1', e.data);
+        }
+
+        worker2.onmessage = (e) => {
+            console.log('worker1', e.data);
+        }
+
+        worker3.onmessage = (e) => {
+            console.log('worker1', e.data);
+        }
+
+        worker4.onmessage = (e) => {
+            console.log('worker1', e.data);
+        }
+    </script>
+</body>
+
+</html>
